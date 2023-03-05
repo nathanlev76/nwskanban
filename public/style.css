@@ -2,6 +2,10 @@
     color: white;
 }
 
+input, select, textarea{
+    color: black;
+}
+
 h1{
     text-align: center;
 }

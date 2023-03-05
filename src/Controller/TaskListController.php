@@ -23,10 +23,11 @@ class TaskListController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_task_list_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TaskListRepository $taskListRepository): Response
+    #[Route('/new/{id}', name: 'app_task_list_new', methods: ['GET', 'POST'])]
+    public function new($id, Request $request, TaskListRepository $taskListRepository): Response
     {
         $taskList = new TaskList();
+        $taskList->setBoardId($id);
         $form = $this->createForm(TaskListType::class, $taskList);
         $userLogged = $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         $form->handleRequest($request);
@@ -34,7 +35,7 @@ class TaskListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $taskListRepository->save($taskList, true);
 
-            return $this->redirectToRoute('app_task_list_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_board_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('task_list/new.html.twig', [
@@ -57,16 +58,18 @@ class TaskListController extends AbstractController
     {
         $form = $this->createForm(TaskListType::class, $taskList);
         $form->handleRequest($request);
+        $userLogged = $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $taskListRepository->save($taskList, true);
 
-            return $this->redirectToRoute('app_task_list_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_board_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('task_list/edit.html.twig', [
             'task_list' => $taskList,
             'form' => $form,
+            'userLogged' => $userLogged
         ]);
     }
 

@@ -3,19 +3,26 @@
 {% block title %}{{ board.libelle }}{% endblock %}
 
 {% block body %}
+    <div id="h1button">
+        <h1>Listes</h1>
+        <a class="btn btn-success" href="/taskList/new/{{ board.id }}" id="addbutton">Ajouter une liste</a>
+    </div>
     <div>
     <table class="table">
         <thead>
             <tr>
                 <th>Nom de la liste</th>
-                <th>ID Board</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for task in tasklist %}
             <tr>
                 <td>{{ task.libelle }}</td>
-                <td>{{ task.id }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_board_show', {'id': board.id}) }}">Voir le tableau</a>
+                    <a class="btn btn-warning" href="{{ path('app_board_edit', {'id': board.id}) }}">Modifier le tableau</a>
+                </td>
             </tr>
         {% else %}
             <tr>

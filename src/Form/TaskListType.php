@@ -13,7 +13,6 @@ class TaskListType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('board_id')
         ;
     }
 

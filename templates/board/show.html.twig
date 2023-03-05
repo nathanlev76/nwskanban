@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ board.libelle }}{% endblock %}
+
+{% block body %}
+    <div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom de la liste</th>
+                <th>ID Board</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasklist %}
+            <tr>
+                <td>{{ task.libelle }}</td>
+                <td>{{ task.id }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Vous n'avez pas encore de liste dans ce tableau <a class="btn btn-primary mr-2" href="{{ path('app_board_new') }}">Créer une nouvelle liste</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+

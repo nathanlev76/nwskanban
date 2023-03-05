@@ -1,0 +1,54 @@
+*{
+    color: white;
+}
+
+h1{
+    text-align: center;
+}
+
+#addbutton{
+    margin-left: 25px;
+    font-size: 140%;
+}
+
+#h1button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#title{
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 5px;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+#navbar{
+    height: 60px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#nwslogo{
+    height: 50px;
+    width: 50px;
+}
+
+body{
+    background-image: url("/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

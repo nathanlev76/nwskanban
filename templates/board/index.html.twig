@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Board index{% endblock %}
+
+{% block body %}
+    <div id="h1button">
+        <h1>Mes tableaux</h1>
+        <a class="btn btn-success" href="{{ path('app_board_new') }}" id="addbutton">Ajouter un tableau</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du tableau</th>
+                <th>Description du tableau</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for board in boards %}
+            <tr>
+                <td>{{ board.libelle }}</td>
+                <td>{{ board.Description }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_board_show', {'id': board.id}) }}">Voir le tableau</a>
+                    <a class="btn btn-warning" href="{{ path('app_board_edit', {'id': board.id}) }}">Modifier le tableau</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Vous n'avez pas encore de tableaux <a class="btn btn-primary mr-2" href="{{ path('app_board_new') }}">Créer un nouveau tableau</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

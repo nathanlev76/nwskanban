@@ -35,7 +35,7 @@ class TaskListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $taskListRepository->save($taskList, true);
 
-            return $this->redirectToRoute('app_board_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_board_show', ["id" => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('task_list/new.html.twig', [
@@ -75,13 +75,12 @@ class TaskListController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_task_list_delete', methods: ['GET', 'POST'])]
-    public function delete(Request $request, TaskList $taskList, TaskListRepository $taskListRepository): Response
+    #[Route('/{id}/{board_id}', name: 'app_task_list_delete', methods: ['GET', 'POST'])]
+    public function delete($id, $board_id, Request $request, TaskList $taskList, TaskListRepository $taskListRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$taskList->getId(), $request->request->get('_token'))) {
             $taskListRepository->remove($taskList, true);
         }
-
-        return $this->redirectToRoute('app_board_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_board_show', ["id" => $board_id], Response::HTTP_SEE_OTHER);
     }
 }

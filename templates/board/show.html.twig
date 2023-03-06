@@ -22,11 +22,15 @@
                 <td>
                     <a class="btn btn-primary" href="/taskList/{{ task.id }}">Voir la liste</a>
                     <a class="btn btn-warning" href="/taskList/{{ task.id }}/edit">Modifier la liste</a>
+                    <form method="post" action="{{ path('app_task_list_delete', {'id': task.id, 'board_id': board.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
+                        <button class="btn btn-danger">Supprimer la liste</button>
+                    </form>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">Vous n'avez pas encore de liste dans ce tableau <a class="btn btn-primary mr-2" href="{{ path('app_board_new') }}">Créer une nouvelle liste</a></td>
+                <td colspan="4">Vous n'avez pas encore de liste dans ce tableau</td>
             </tr>
         {% endfor %}
         </tbody>

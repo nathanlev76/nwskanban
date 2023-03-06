@@ -20,8 +20,8 @@
             <tr>
                 <td>{{ task.libelle }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_board_show', {'id': board.id}) }}">Voir le tableau</a>
-                    <a class="btn btn-warning" href="{{ path('app_board_edit', {'id': board.id}) }}">Modifier le tableau</a>
+                    <a class="btn btn-primary" href="/taskList/{{ task.id }}">Voir la liste</a>
+                    <a class="btn btn-warning" href="/taskList/{{ task.id }}/edit">Modifier la liste</a>
                 </td>
             </tr>
         {% else %}

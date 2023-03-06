@@ -101,7 +101,7 @@ class BoardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_board_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_board_delete', methods: ['POST'])]
     public function delete(Request $request, Board $board, BoardRepository $boardRepository): Response
     {
         $userLogged = $this->denyAccessUnlessGranted('IS_AUTHENTICATED');

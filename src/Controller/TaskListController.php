@@ -48,8 +48,10 @@ class TaskListController extends AbstractController
     #[Route('/{id}', name: 'app_task_list_show', methods: ['GET'])]
     public function show(TaskList $taskList): Response
     {
+        $userLogged = $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         return $this->render('task_list/show.html.twig', [
             'task_list' => $taskList,
+            'userLogged' => $userLogged
         ]);
     }
 
@@ -73,13 +75,13 @@ class TaskListController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_task_list_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_task_list_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, TaskList $taskList, TaskListRepository $taskListRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$taskList->getId(), $request->request->get('_token'))) {
             $taskListRepository->remove($taskList, true);
         }
 
-        return $this->redirectToRoute('app_task_list_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_board_index', [], Response::HTTP_SEE_OTHER);
     }
 }
